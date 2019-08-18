@@ -26,7 +26,7 @@ public interface INode <T extends Comparable <T>>
 	 * @param dato Objeto de busqueda en el arreglo
 	 * @return elemento encontrado en la lista (si existe). null si no se encontro el dato.
 	 */
-	public T buscar(T dato);
+	public dato buscar(T dato);
 
 	/**
 	 * Elimina un dato de la lista.
@@ -34,5 +34,21 @@ public interface INode <T extends Comparable <T>>
 	 * @return dato eliminado
 	 */
 	public T eliminar( T dato );
+	/**
+	 * Dar sigueiente Dato 
+	 * @return el dato siguente 
+	 */
+	public dato darSiguente();
+	/**
+	 * Cambiar el primero 
+	 */
+	public void cambiarPrimero(dato dt);
+
+	/**
+	 * Da el primer dato
+	 * @return el primer dato
+	 */
+	public dato darPrimero();
+
 
 }
