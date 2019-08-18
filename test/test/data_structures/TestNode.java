@@ -16,7 +16,7 @@ public class TestNode
 	public void setUp1() 
 	{
 		node= new Node();
-		node.agregar( "hola");
+		node.asignarDato("hola");
 
 	}
 	@Before
@@ -24,23 +24,25 @@ public class TestNode
 	{
 		int x= 1;
 		int y = 2;
+		Node psig = new Node();
 		node= new Node();
-		node.agregar( x);
-		node.agregar(y);
+		node.asignarDato( x);
+		node.asignarSiguiente(psig);
+		psig.asignarDato(y);
 
 	}
 	@Test
 	public void testNode() {
 		assertTrue(node !=null);
-		assertEquals(1, node.darTamano());
-		assertEquals("hola", node.darPrimero().darElemento());
+		assertEquals("hola", node.darDato());
+		assertEquals(null, node.darSiguente());
 	}
 	@Test
 	public void testNode2() {
-	setUp2();
-	assertTrue(node.darPrimero() !=null);
-	assertEquals(2, node.darTamano());
-	assertEquals(2, node.darPrimero().darSiguente().darElemento());
-}
+		setUp2();
+		assertTrue(node !=null);
+		assertEquals(1, node.darDato());
+		assertEquals(2, node.darSiguente().darDato());
+	}
 
 }
