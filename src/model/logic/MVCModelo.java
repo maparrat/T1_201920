@@ -1,72 +1,170 @@
 package model.logic;
 
-import model.data_structures.ArregloDinamico;
-import model.data_structures.IArregloDinamico;
+import java.io.FileReader;
+
+import com.opencsv.CSVReader;
+
+import model.data_structures.INode;
+import model.data_structures.Node;
 
 /**
  * Definicion del modelo del mundo
- *
  */
-public class MVCModelo {
+public class MVCModelo{
+
 	/**
 	 * Atributos del modelo del mundo
 	 */
-	private IArregloDinamico datos;
-	
+	private INode primero;
+
+	private INode actual;
+
+	private int tamano;
+
 	/**
-	 * Constructor del modelo del mundo con capacidad predefinida
+	 * Constructor del modelo del mundo
 	 */
 	public MVCModelo()
 	{
-		datos = new ArregloDinamico(7);
+		tamano = 0;
 	}
-	
+
 	/**
-	 * Constructor del modelo del mundo con capacidad dada
-	 * @param tamano
+	 * Metodo que carga los archivos
+	 * @param prutaArchivo CSV
 	 */
-	public MVCModelo(int capacidad)
-	{
-		datos = new ArregloDinamico(capacidad);
+	public void cargarArchivoCSV(int numeroMes) throws Exception
+	{		
+		if(primero == null)
+		{
+			primero = new Node();
+			actual = primero;
+		}
+		else
+		{
+			actual = primero;
+			while(actual.darSiguente() != null)
+			{
+				actual = actual.darSiguente();
+			}
+			actual.asignarSiguiente(new Node());
+			actual = actual.darSiguente();
+		}
+
+		INode anterior = null;
+		boolean primeraLectura = true;
+
+		CSVReader reader = new CSVReader(new FileReader("./data/bogota-cadastral-2018-" + numeroMes + "-All-MonthlyAggregate.csv"));
+
+		for(String[] line: reader)
+		{
+			if(!primeraLectura)
+			{
+				Double[] dato = {Double.parseDouble(line[0]), Double.parseDouble(line[1]), Double.parseDouble(line[2]), Double.parseDouble(line[3]), Double.parseDouble(line[4]), Double.parseDouble(line[5]), Double.parseDouble(line[6])}; 
+				actual.asignarDato(dato);
+				actual.asignarSiguiente(new Node());
+				anterior = actual;
+				actual = actual.darSiguente();
+				tamano++;
+			}
+			primeraLectura = false;
+		}
+
+		//Queda un nodo vacío, entonces se elimina
+		anterior.asignarSiguiente(null);
+		tamano--;
+
+		reader.close();
 	}
-	
+
 	/**
-	 * Servicio de consulta de numero de elementos presentes en el modelo 
+	 * Retorna el número de elementos en el modelo
 	 * @return numero de elementos presentes en el modelo
 	 */
 	public int darTamano()
 	{
-		return datos.darTamano();
+		return tamano;
 	}
 
 	/**
-	 * Requerimiento de agregar dato
-	 * @param dato
+	 * Crea una lista encadenada con los datos buscados
+	 * @param mes Mes a buscar
+	 * @param zonaOrigen Zona de origen a buscar
+	 * @return Un nodo que inicia la lista encadenada de respuesta
 	 */
-	public void agregar(String dato)
-	{	
-		datos.agregar(dato);
+	public Node busquedaPorMesYZonaOrigen(double mes, double zonaOrigen)
+	{
+		actual = primero;
+
+		Node respuesta = new Node();
+		Node anteriorRespuesta = null;
+		Node actualRespuesta = respuesta;
+
+		while(actual != null)
+		{
+			Double[] datos = (Double[]) actual.darDato();
+			if(datos[2] == mes && datos[0] == zonaOrigen)
+			{
+				actualRespuesta.asignarDato(datos);
+				actualRespuesta.asignarSiguiente(new Node());
+				anteriorRespuesta = actualRespuesta;
+				actualRespuesta = actualRespuesta.darSiguente();
+			}
+			actual = actual.darSiguente();
+		}
+
+		//Queda un nodo de más
+		if(respuesta.darDato() == null)
+		{
+			return null;
+		}
+		else
+		{
+			anteriorRespuesta.asignarSiguiente(null);
+			return respuesta;
+		}
+	}
+
+	/**
+	 * Indica el número de viajes en el mes indicado
+	 * @param mes Mes a buscar
+	 * @return el número de viajes en el mes indicado
+	 */
+	public double numeroViajesSegunMes(double mes)
+	{
+		actual = primero;
+		double respuesta = 0;
+		
+		while(actual != null)
+		{
+			Double[] datos = (Double[]) actual.darDato();
+			if(datos[2] == mes)
+			{
+				respuesta++;
+			}
+		}
+		return respuesta;
 	}
 	
 	/**
-	 * Requerimiento buscar dato
-	 * @param dato Dato a buscar
-	 * @return dato encontrado
+	 * Indica el número de viajes en el mes indicado con la zona de origen indicada
+	 * @param mes Mes a buscar
+	 * @param zonaDeOrigen Zona de origen a buscar
+	 * @return el número de viajes en el mes indicado con la zona de origen indicada
 	 */
-	public String buscar(String dato)
+	public double numeroViajesSegunMesYZonaOrigen(double mes, double zonaDeOrigen)
 	{
-		return datos.buscar(dato);
+		actual = primero;
+		double respuesta = 0;
+		
+		while(actual != null)
+		{
+			Double[] datos = (Double[]) actual.darDato();
+			if(datos[2] == mes && datos[0] == zonaDeOrigen)
+			{
+				respuesta++;
+			}
+		}
+		return respuesta;
 	}
-	
-	/**
-	 * Requerimiento eliminar dato
-	 * @param dato Dato a eliminar
-	 * @return dato eliminado
-	 */
-	public String eliminar(String dato)
-	{
-		return datos.eliminar(dato);
-	}
-
-
 }

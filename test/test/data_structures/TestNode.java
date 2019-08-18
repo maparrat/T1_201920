@@ -6,10 +6,10 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import model.data_structures.ArregloDinamico;
 import model.data_structures.Node;
 
-public class TestNode {
+public class TestNode
+{
 	private Node node;
 
 	@Before

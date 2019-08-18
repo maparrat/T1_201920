@@ -1,4 +1,7 @@
 Cosas pendientes 
-1) hacer el UML (para esto hay librerias que hacen el uml pero no se si es valido o no) 
-3) Hacer los metodos en el controller del app
-4) Citar las librerias en biografia
+1) hacer el UML (para esto hay librerias que hacen el uml pero no se si es valido o no)
+
+2) Segundo requerimiento de la lista (no se a que se refieren, caso 2 del controller):  Permitir al usuario ingresar los siguientes datos que serán utilizados en los siguientes servicios:
+un número de mes para el primer semestre y el identificador numérico de una zona de origen de los viajes.
+
+3)Tests

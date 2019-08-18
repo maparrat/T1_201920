@@ -1,54 +1,28 @@
 package model.data_structures;
 
-public interface INode <T extends Comparable <T>>
-{
+public interface INode <T>
+{	
 	/**
-	 * Retornar el numero de elementos en la lista
+	 * Asigna el dato del nodo por el que llega por parametro
+	 * @param pDato Nuevo dato
+	 */
+	public void asignarDato(T pDato);
+	
+	/**
+	 * Asigna el siguiente nodo por el que llega por parametro
+	 * @param pSiguiente Nuevo siguiente nodo
+	 */
+	public void asignarSiguiente(Node pSiguiente);
+
+	/**
+	 * Dar sigueiente nodo 
+	 * @return el nodo siguente 
+	 */
+	public Node darSiguente();
+	
+	/**
+	 * Retorna el dato del nodo
 	 * @return
 	 */
-	int darTamano( );
-
-	/**
-	 * Retornar el elemento en la posicion i
-	 * @param i posicion de consulta
-	 * @return elemento de consulta. null si no hay elemento en posicion.
-	 */
-	public T darElemento( int i );
-
-	/**
-	 * 
-	 * @param elemento Nuevo elemento
-	 */
-	public void agregar(T elemento);
-
-	/**
-	 * 
-	 * @param dato Objeto de busqueda en el arreglo
-	 * @return elemento encontrado en la lista (si existe). null si no se encontro el dato.
-	 */
-	public dato buscar(T dato);
-
-	/**
-	 * Elimina un dato de la lista.
-	 * @param dato Objeto de eliminacion en el arreglo
-	 * @return dato eliminado
-	 */
-	public T eliminar( T dato );
-	/**
-	 * Dar sigueiente Dato 
-	 * @return el dato siguente 
-	 */
-	public dato darSiguente();
-	/**
-	 * Cambiar el primero 
-	 */
-	public void cambiarPrimero(dato dt);
-
-	/**
-	 * Da el primer dato
-	 * @return el primer dato
-	 */
-	public dato darPrimero();
-
-
+	public T darDato();
 }

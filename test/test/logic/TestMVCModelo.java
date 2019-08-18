@@ -1,55 +1,67 @@
 package test.logic;
 
 import static org.junit.Assert.*;
+
+import model.data_structures.Node;
 import model.logic.MVCModelo;
 
 import org.junit.Before;
 import org.junit.Test;
 
-public class TestMVCModelo {
-	
+public class TestMVCModelo
+{	
 	private MVCModelo modelo;
-	private static int CAPACIDAD=100;
-	
+
 	@Before
-	public void setUp1() {
-		modelo= new MVCModelo(CAPACIDAD);
+	public void setUp()
+	{
+		modelo= new MVCModelo();
 	}
 
-	public void setUp2() {
-		for(int i =0; i< CAPACIDAD;i++){
-			modelo.agregar(""+i);
+	//Está así para que no se ejecute, son muchos elementos
+	/**
+	@Test
+	public void testCargarArchivoCSV()
+	{
+		try
+		{
+			modelo.cargarArchivoCSV(1);
+			assertTrue("Deberian haber elementos", modelo.darTamano()>1000000);
+		}
+		catch (Exception e)
+		{
+			fail("No debería mandar error");
 		}
 	}
+	*/
 
+	
+	
+	
 	@Test
-	public void testMVCModelo() {
-		assertTrue(modelo!=null);
-		assertEquals(0, modelo.darTamano());  // Modelo con 0 elementos presentes.
-	}
-
-	@Test
-	public void testDarTamano() {
-		assertEquals(0, modelo.darTamano());  // Modelo con 0 elementos presentes.
+	public void testBusquedaPorMesYZonaOrigen()
+	{
+		Node respuesta = modelo.busquedaPorMesYZonaOrigen(1, 567);
+		assertNull("La lista de la respuesta debería estar vacía y su primer nodo debería ser nulo.", respuesta);
 	}
 
 	@Test
 	public void testAgregar() {
 		// TODO Completar la prueba
-		
+
 	}
 
 	@Test
-	public void testBuscar() {
-		setUp2();
+	public void testBuscar()
+	{
 		// TODO Completar la prueba
 	}
 
 	@Test
-	public void testEliminar() {
-		setUp2();
+	public void testEliminar()
+	{
 		// TODO Completar la prueba
-		
+
 	}
 
 }
