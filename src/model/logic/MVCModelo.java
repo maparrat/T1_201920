@@ -113,13 +113,13 @@ public class MVCModelo{
 			actual = actual.darSiguente();
 		}
 
-		//Queda un nodo de más
 		if(respuesta.darDato() == null)
 		{
 			return null;
 		}
 		else
 		{
+			//Queda un nodo de más
 			anteriorRespuesta.asignarSiguiente(null);
 			return respuesta;
 		}

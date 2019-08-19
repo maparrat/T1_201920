@@ -22,7 +22,7 @@ public interface INode <T>
 	
 	/**
 	 * Retorna el dato del nodo
-	 * @return
+	 * @return el dato del nodo
 	 */
 	public T darDato();
 }

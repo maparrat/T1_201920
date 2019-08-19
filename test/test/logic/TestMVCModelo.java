@@ -16,6 +16,7 @@ public class TestMVCModelo
 	public void setUp()
 	{
 		modelo= new MVCModelo();
+		
 	}
 
 	//Está así para que no se ejecute, son muchos elementos
@@ -35,8 +36,13 @@ public class TestMVCModelo
 	}
 	*/
 
-	
-	
+	@Test
+	public void testDarTamano()
+	{
+		// TODO Completar la prueba
+		
+
+	}	
 	
 	@Test
 	public void testBusquedaPorMesYZonaOrigen()
@@ -46,22 +52,15 @@ public class TestMVCModelo
 	}
 
 	@Test
-	public void testAgregar() {
-		// TODO Completar la prueba
-
-	}
-
-	@Test
-	public void testBuscar()
+	public void testNumeroViajesSegunMes()
 	{
 		// TODO Completar la prueba
 	}
 
 	@Test
-	public void testEliminar()
+	public void testNumeroViajesSegunMesYZonaOrigen()
 	{
 		// TODO Completar la prueba
 
 	}
-
 }

@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import model.data_structures.Node;
@@ -36,11 +37,34 @@ public class Controller {
 		{
 			view.printMenu();
 
-			int option = lector.nextInt();
+			String in;
+			in = lector.next();
+			
+			int option;
+			try
+			{
+				option = Integer.parseInt(in);
+			}
+			catch(NumberFormatException e)
+			{
+				option = 0;
+			}
+
 			switch(option){
 			case 1:
-				System.out.println("--------- \nCargar archivo \nDar numero del trimestre: ");
-				int numeroTrimestre = lector.nextInt();
+
+				int numeroTrimestre;
+				try
+				{
+					System.out.println("--------- \nCargar archivo \nDar numero del trimestre: ");
+					numeroTrimestre = lector.nextInt();
+				}
+				catch(InputMismatchException e)
+				{
+					System.out.println("Debe ingresar un valor numérico (1 o 2)\n---------");
+					break;
+				}
+
 				if(numeroTrimestre == 1 || numeroTrimestre == 2)
 				{
 					modelo = new MVCModelo();
@@ -62,18 +86,22 @@ public class Controller {
 				break;
 
 			case 2:
-				System.out.println("--------- \nDar cadena (simple) a ingresar: ");
-				//dato = lector.next();
-				//modelo.agregar(dato);
-				System.out.println("Dato agregado");
-				System.out.println("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
-				break;
 
-			case 3:
-				System.out.println("--------- \nDar mes a buscar: ");
-				double mes = lector.nextInt();
-				System.out.println("--------- \nDar id zona de origen a buscar: ");
-				double zonaOrigen = lector.nextInt();
+				double mes;
+				double zonaOrigen;
+				try
+				{
+					System.out.println("--------- \nDar mes a buscar: ");
+					mes = lector.nextInt();
+					System.out.println("--------- \nDar id zona de origen a buscar: ");
+					zonaOrigen = lector.nextInt();
+				}
+				catch(InputMismatchException e)
+				{
+					System.out.println("Debe ingresar valores numéricos\n---------");
+					break;
+				}
+
 				Node lista = modelo.busquedaPorMesYZonaOrigen(mes, zonaOrigen);
 				if (lista == null)
 				{
@@ -90,8 +118,32 @@ public class Controller {
 				}
 				break;
 
-			case 4:
+			case 3:
 				System.out.println("El número de viajes reportados en el semestre es: " + modelo.darTamano() + "\n---------");						
+				break;
+
+			case 4:
+				if(modelo.darTamano() == 0)
+				{
+					System.out.println("No hay viajes registrados en ningún mes\n---------");
+				}
+				else
+				{
+					double mesABuscar;
+					try
+					{
+						System.out.println("--------- \nDar mes a buscar: ");
+						mesABuscar = lector.nextInt();
+					}
+					catch(InputMismatchException e)
+					{
+						System.out.println("Debe ingresar un valor numérico\n---------");
+						break;
+					}					
+
+					double cantidad = modelo.numeroViajesSegunMes(mesABuscar);
+					System.out.println("El número de viajes reportados en el mes es: " + cantidad + "\nEl porcentaje respecto al total de viajes del semestre es: "+ (cantidad/modelo.darTamano())*100 + "\n---------");
+				}
 				break;
 
 			case 5:
@@ -101,30 +153,27 @@ public class Controller {
 				}
 				else
 				{
-					System.out.println("--------- \nDar mes a buscar: ");
-					double mesABuscar = lector.nextInt();
-					double cantidad = modelo.numeroViajesSegunMes(mesABuscar);
-					System.out.println("El número de viajes reportados en el mes es: " + cantidad + "\nEl porcentaje respecto al total de viajes del semestre es: "+ (cantidad/modelo.darTamano())*100 + "\n---------");
-				}
-				break;
-				
-			case 6:
-				if(modelo.darTamano() == 0)
-				{
-					System.out.println("No hay viajes registrados en ningún mes\n---------");
-				}
-				else
-				{
-					System.out.println("--------- \nDar mes a buscar: ");
-					double mesABuscar = lector.nextInt();
-					System.out.println("--------- \nDar id zona de origen a buscar: ");
-					double zonaDeOrigen = lector.nextInt();
+					double mesABuscar;
+					double zonaDeOrigen;
+					try
+					{
+						System.out.println("--------- \nDar mes a buscar: ");
+						mesABuscar = lector.nextInt();
+						System.out.println("--------- \nDar id zona de origen a buscar: ");
+						zonaDeOrigen = lector.nextInt();
+					}
+					catch(InputMismatchException e)
+					{
+						System.out.println("Debe ingresar valores numéricos\n---------");
+						break;
+					}
+
 					double cantidad = modelo.numeroViajesSegunMesYZonaOrigen(mesABuscar, zonaDeOrigen);
 					System.out.println("El número de viajes reportados en el mes es para esa zona es: " + cantidad + "\nEl porcentaje respecto al total de viajes del mes es: "+ (cantidad/modelo.numeroViajesSegunMes(mesABuscar))*100 + "\n---------");
 				}
 				break;
-				
-			case 7: 
+
+			case 6: 
 				System.out.println("--------- \n Hasta pronto !! \n---------"); 
 				lector.close();
 				fin = true;
