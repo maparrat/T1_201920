@@ -28,7 +28,7 @@ public class MVCModelo{
 	{
 		tamano = 0;
 	}
-
+	
 	/**
 	 * Metodo que carga los archivos
 	 * @param prutaArchivo CSV

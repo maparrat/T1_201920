@@ -19,7 +19,7 @@ public class TestNode
 	
 	public void setUp2() 
 	{
-		int x= 1;
+		int x = 1;
 		int y = 2;
 		Node psig = new Node();
 		node= new Node();

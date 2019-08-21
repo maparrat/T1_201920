@@ -13,54 +13,44 @@ public class TestMVCModelo
 	private MVCModelo modelo;
 
 	@Before
+	@Test
 	public void setUp()
 	{
 		modelo= new MVCModelo();
-		
-	}
-
-	//Está así para que no se ejecute, son muchos elementos
-	/**
-	@Test
-	public void testCargarArchivoCSV()
-	{
 		try
 		{
 			modelo.cargarArchivoCSV(1);
-			assertTrue("Deberian haber elementos", modelo.darTamano()>1000000);
 		}
-		catch (Exception e)
+		catch(Exception e)
 		{
-			fail("No debería mandar error");
+			e.printStackTrace();
 		}
 	}
-	*/
 
 	@Test
 	public void testDarTamano()
 	{
-		// TODO Completar la prueba
-		
-
+		assertTrue("Deberian haber elementos", modelo.darTamano()>1000000);
 	}	
-	
+
 	@Test
 	public void testBusquedaPorMesYZonaOrigen()
 	{
-		Node respuesta = modelo.busquedaPorMesYZonaOrigen(1, 567);
-		assertNull("La lista de la respuesta debería estar vacía y su primer nodo debería ser nulo.", respuesta);
+		Node respuesta = modelo.busquedaPorMesYZonaOrigen(2, 955);
+		assertNotNull("Debería devolver la lista con al menos un nodo.", respuesta);
 	}
 
 	@Test
 	public void testNumeroViajesSegunMes()
 	{
-		// TODO Completar la prueba
+		double respuesta = modelo.numeroViajesSegunMes(2);
+		assertTrue("Deberían existir elementos", respuesta > 0);	
 	}
 
 	@Test
 	public void testNumeroViajesSegunMesYZonaOrigen()
 	{
-		// TODO Completar la prueba
-
+		double respuesta = modelo.numeroViajesSegunMesYZonaOrigen(2, 955);
+		assertTrue("Deberían existir elementos", respuesta > 0);	
 	}
 }
