@@ -13,7 +13,6 @@ public class TestMVCModelo
 	private MVCModelo modelo;
 
 	@Before
-	@Test
 	public void setUp()
 	{
 		modelo= new MVCModelo();
@@ -25,7 +24,7 @@ public class TestMVCModelo
 		{
 			e.printStackTrace();
 		}
-	}
+	}	
 
 	@Test
 	public void testDarTamano()

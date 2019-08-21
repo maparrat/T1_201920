@@ -142,6 +142,7 @@ public class MVCModelo{
 			{
 				respuesta++;
 			}
+			actual = actual.darSiguente();
 		}
 		return respuesta;
 	}
@@ -164,6 +165,7 @@ public class MVCModelo{
 			{
 				respuesta++;
 			}
+			actual = actual.darSiguente();
 		}
 		return respuesta;
 	}

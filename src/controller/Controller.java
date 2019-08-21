@@ -67,7 +67,6 @@ public class Controller {
 
 				if(numeroTrimestre == 1 || numeroTrimestre == 2)
 				{
-					modelo = new MVCModelo();
 					try
 					{
 						modelo.cargarArchivoCSV(numeroTrimestre);
