@@ -70,7 +70,7 @@ public class MVCModelo{
 			primeraLectura = false;
 		}
 
-		//Queda un nodo vacío, entonces se elimina
+		//Queda un nodo vacÃ­o, entonces se elimina
 		anterior.asignarSiguiente(null);
 		tamano--;
 
@@ -78,7 +78,7 @@ public class MVCModelo{
 	}
 
 	/**
-	 * Retorna el número de elementos en el modelo
+	 * Retorna el nÃºmero de elementos en el modelo
 	 * @return numero de elementos presentes en el modelo
 	 */
 	public int darTamano()
@@ -86,6 +86,9 @@ public class MVCModelo{
 		return tamano;
 	}
 
+	
+	
+	//TODO Los metodos no estan arrojando los resultados que son.
 	/**
 	 * Crea una lista encadenada con los datos buscados
 	 * @param mes Mes a buscar
@@ -119,16 +122,16 @@ public class MVCModelo{
 		}
 		else
 		{
-			//Queda un nodo de más
+			//Queda un nodo de mÃ¡s
 			anteriorRespuesta.asignarSiguiente(null);
 			return respuesta;
 		}
 	}
 
 	/**
-	 * Indica el número de viajes en el mes indicado
+	 * Indica el nÃºmero de viajes en el mes indicado
 	 * @param mes Mes a buscar
-	 * @return el número de viajes en el mes indicado
+	 * @return el nÃºmero de viajes en el mes indicado
 	 */
 	public double numeroViajesSegunMes(double mes)
 	{
@@ -148,10 +151,10 @@ public class MVCModelo{
 	}
 	
 	/**
-	 * Indica el número de viajes en el mes indicado con la zona de origen indicada
+	 * Indica el nÃºmero de viajes en el mes indicado con la zona de origen indicada
 	 * @param mes Mes a buscar
 	 * @param zonaDeOrigen Zona de origen a buscar
-	 * @return el número de viajes en el mes indicado con la zona de origen indicada
+	 * @return el nÃºmero de viajes en el mes indicado con la zona de origen indicada
 	 */
 	public double numeroViajesSegunMesYZonaOrigen(double mes, double zonaDeOrigen)
 	{
